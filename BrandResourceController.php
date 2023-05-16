@@ -79,11 +79,7 @@ class BrandResourceController extends BaseController
     {
 
         $mode =  (user()->user_mode == "supplier") ? 'default' :'admin';
-        if ($brand->exists) {
-            $view = "product::$mode.brand.show";
-        } else {
-            $view = "product::$mode.brand.new";
-        }
+        $view = $brand->exists ? "product::$mode.brand.show" : "product::$mode.brand.new";
 
         return $this->response->setMetaTitle(trans('app.view') . ' ' . trans('product::brand.name'))
             ->data(compact('brand'))
